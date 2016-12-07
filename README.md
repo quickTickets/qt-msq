@@ -1,1 +1,1 @@
-# qt-msq
+# qt-msq v 1.0
