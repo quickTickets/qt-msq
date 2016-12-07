@@ -18,11 +18,27 @@ apply plugin: 'org.flywaydb.flyway'
 apply plugin: 'application'
 apply plugin: 'docker'
 
+
+
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group = 'aglover'
+group = 'qtmsq'
 mainClassName = 'com.ns.qt.Application'
+
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = true
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
 
 jar {
     baseName = 'qt-service'
