@@ -5,21 +5,30 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
         classpath("org.flywaydb:flyway-gradle-plugin:4.0.3")
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
     }
 }
+
+
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'org.flywaydb.flyway'
+apply plugin: 'application'
+apply plugin: 'docker'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+group = 'aglover'
+mainClassName = 'com.ns.qt.Application'
 
 jar {
     baseName = 'qt-service'
     version =  '0.1.0'
 }
+
 
 repositories {
     mavenCentral()
