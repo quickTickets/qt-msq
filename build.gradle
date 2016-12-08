@@ -5,7 +5,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
         classpath("org.flywaydb:flyway-gradle-plugin:4.0.3")
-        classpath 'se.transmode.gradle:gradle-docker:1.2'
+        classpath("se.transmode.gradle:gradle-docker:1.2")
     }
 }
 
@@ -19,29 +19,13 @@ apply plugin: 'application'
 apply plugin: 'docker'
 
 
-
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group = 'qtmsq'
-mainClassName = 'com.ns.qt.Application'
 
-
-task buildDocker(type: Docker, dependsOn: build) {
-    push = true
-    applicationName = jar.baseName
-    dockerfile = file('src/main/docker/Dockerfile')
-    doFirst {
-        copy {
-            from jar
-            into stageDir
-        }
-    }
-}
 
 jar {
-    baseName = 'qt-service'
+    baseName = 'qt-msq'
     version =  '0.1.0'
 }
 
@@ -54,10 +38,10 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-security")
-    compile'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile'org.postgresql:postgresql:9.4-1206-jdbc4'
-    compile'org.flywaydb:flyway-gradle-plugin:4.0.3'
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.postgresql:postgresql:9.4-1206-jdbc4")
+    compile("org.flywaydb:flyway-gradle-plugin:4.0.3")
 }
 
 task wrapper(type: Wrapper) {
@@ -71,3 +55,15 @@ flyway {
     baselineOnMigrate = true
 }
 
+task buildDocker(type: Docker) {
+    baseImage = 'qt-msq/java:latest'
+    push = project.hasProperty('push')
+    tag = 'quicktickets/qt-msq'
+    addFile {
+        from jar
+        rename {'app.jar'}
+    }
+    entryPoint(['java', '-Djava.security.egd=file:/dev/./urandom', '-jar', '/app.jar'])
+}
+
+buildDocker.dependsOn(build)
