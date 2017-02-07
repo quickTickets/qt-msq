@@ -56,7 +56,7 @@ flyway {
 }
 
 task buildDocker(type: Docker) {
-    baseImage = 'qt-msq/java:latest'
+    baseImage = 'java:8'
     push = project.hasProperty('push')
     tag = 'quicktickets/qt-msq'
     addFile {
