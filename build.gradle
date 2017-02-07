@@ -55,6 +55,7 @@ flyway {
     baselineOnMigrate = true
 }
 
+/*
 task buildDocker(type: Docker) {
     baseImage = 'java:8'
     push = project.hasProperty('push')
@@ -67,3 +68,4 @@ task buildDocker(type: Docker) {
 }
 
 buildDocker.dependsOn(build)
+*/
