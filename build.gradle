@@ -55,6 +55,7 @@ flyway {
     baselineOnMigrate = true
 }
 
+group = 'springio'
 
 apply plugin: 'docker'
 
@@ -69,18 +70,3 @@ task buildDocker(type: Docker, dependsOn: build) {
         }
     }
 }
-
-/*
-task buildDocker(type: Docker) {
-    baseImage = 'java:8'
-    push = project.hasProperty('push')
-    tag = 'qt-msq'
-    addFile {
-        from jar
-        rename {'app.jar'}
-    }
-    entryPoint(['java', '-Djava.security.egd=file:/dev/./urandom', '-jar', '/app.jar'])
-}
-
-buildDocker.dependsOn(build)
-*/
