@@ -55,6 +55,21 @@ flyway {
     baselineOnMigrate = true
 }
 
+
+apply plugin: 'docker'
+
+task buildDocker(type: Docker, dependsOn: build) {
+    push = true
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
+
 /*
 task buildDocker(type: Docker) {
     baseImage = 'java:8'
