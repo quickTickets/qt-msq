@@ -1,5 +1,6 @@
 package com.ns.qt.config;
 
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-/**
- * Created by Sergey_Samarkin on 12/7/2016.
- */
-
-import com.ns.qt.service.UserService;
+import com.ns.qt.service.UserServiceImpl;
 
 
 @Configuration
@@ -22,7 +19,7 @@ import com.ns.qt.service.UserService;
 public class WebSecurityConfig {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,7 +30,7 @@ public class WebSecurityConfig {
     @Order(1)
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
-			http.antMatcher("/users/**")
+			http.csrf().disable().antMatcher("/users/**")
 				.authorizeRequests().
 				anyRequest().
 				hasRole("USER").
