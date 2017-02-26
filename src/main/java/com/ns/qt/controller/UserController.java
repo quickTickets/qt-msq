@@ -16,7 +16,7 @@ import com.ns.qt.entities.User;
 import com.ns.qt.service.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired

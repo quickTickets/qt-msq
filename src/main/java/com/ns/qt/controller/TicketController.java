@@ -16,7 +16,7 @@ import com.ns.qt.entities.Ticket;
 import com.ns.qt.service.TicketService;
 
 @RestController
-@RequestMapping("/tickets")
+@RequestMapping("/api/tickets")
 public class TicketController {
 	
 	@Autowired

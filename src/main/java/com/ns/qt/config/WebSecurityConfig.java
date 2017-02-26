@@ -30,22 +30,13 @@ public class WebSecurityConfig {
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
         	http
-        	    .antMatcher("/users/**")
-				.authorizeRequests().
-				anyRequest().
-				hasRole("USER").
-				and().
+        	    .antMatcher("/api/**")
+				.authorizeRequests()
+				.antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/api/tickets/**").hasAnyRole("USER", "ADMIN")
+				.antMatchers("/api/orders/**").hasAnyRole("ADMIN")
+				.and().
 				httpBasic();
-        	/*http.csrf().disable()
-        		.antMatcher("/users/**")
-        		.antMatcher("/tickets/**")
-        		.antMatcher("/orders/**")
-        	 	.authorizeRequests()
-        	 	.antMatchers("/users/**").hasRole("USER")
-        	 	.antMatchers("/tickets/**").hasRole("USER")
-        	 	.antMatchers("/orders/**").hasRole("ADMIN")
-				.and()
-				.httpBasic();*/
         }
     }
     

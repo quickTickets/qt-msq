@@ -21,6 +21,8 @@ import com.ns.qt.repositories.UsersRepository;
 
 @Service
 public class UserServiceImpl implements UserDetailsService, UserService {
+	
+	private static boolean isAdmin;
 
     @Autowired
     UsersRepository users;
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
         try {
             User client = users.findByUsername(username);
+            initAdmin(client.getUsername());
             loadedUser = new org.springframework.security.core.userdetails.User(
                     client.getUsername(), client.getPassword(),
                     DummyAuthority.getAuth());
@@ -50,8 +53,20 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         }
         @Override
         public String getAuthority() {
-            return "ROLE_USER";
+        	if (isAdmin) {
+        		return "ROLE_ADMIN";
+        	} else {
+        		return "ROLE_USER";	
+        	}            
         }
+    }
+    
+    private void initAdmin(String login) {
+    	if (login != null && login.equals("admin")) {
+    		isAdmin = true;
+    	} else {
+    		isAdmin = false;
+    	}
     }
 
 	@Override

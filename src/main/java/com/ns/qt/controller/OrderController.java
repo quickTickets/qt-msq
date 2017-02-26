@@ -16,7 +16,7 @@ import com.ns.qt.entities.Order;
 import com.ns.qt.service.OrderService;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public class OrderController {
 
 	@Autowired
