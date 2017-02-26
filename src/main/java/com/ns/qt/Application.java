@@ -1,5 +1,7 @@
 package com.ns.qt;
 
+import org.flywaydb.core.Flyway;
+
 /**
  * Created by Sergey_Samarkin on 12/6/2016.
  */
@@ -20,22 +22,10 @@ public class Application {
     }
 
     public static void main(String[] args) {
+    	Flyway f = new Flyway();
+    	f.setDataSource("jdbc:postgresql://localhost:5432/qtdb", "root", "root", "");
+    	f.repair();
         SpringApplication.run(Application.class, args);
     }
 
 }
-
-/*
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-
-@SpringBootApplication
-@ComponentScan
-@EnableJpaRepositories(basePackages = {"com.ns.qt"})
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-}*/

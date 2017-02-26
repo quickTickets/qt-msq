@@ -1,6 +1,5 @@
 package com.ns.qt.config;
 
-import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -30,14 +29,23 @@ public class WebSecurityConfig {
     @Order(1)
     public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
-			http.csrf().disable()
-			    .antMatcher("/users/**")
-			    .antMatcher("/tickets/**")
+        	http
+        	    .antMatcher("/users/**")
 				.authorizeRequests().
 				anyRequest().
 				hasRole("USER").
 				and().
 				httpBasic();
+        	/*http.csrf().disable()
+        		.antMatcher("/users/**")
+        		.antMatcher("/tickets/**")
+        		.antMatcher("/orders/**")
+        	 	.authorizeRequests()
+        	 	.antMatchers("/users/**").hasRole("USER")
+        	 	.antMatchers("/tickets/**").hasRole("USER")
+        	 	.antMatchers("/orders/**").hasRole("ADMIN")
+				.and()
+				.httpBasic();*/
         }
     }
     
