@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ns.qt.entities.User;
 import com.ns.qt.service.UserService;
 
-
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
     
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<User> addUser(@RequestBody final User user) {
