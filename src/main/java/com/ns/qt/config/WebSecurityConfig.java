@@ -33,8 +33,8 @@ public class WebSecurityConfig {
         	    .antMatcher("/api/**")
 				.authorizeRequests()
 				.antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/api/tickets/**").hasAnyRole("USER", "ADMIN")
-				.antMatchers("/api/orders/**").hasAnyRole("ADMIN")
+				.antMatchers("/api/tickets/**").hasRole("ADMIN")
+				.antMatchers("/api/orders/**").hasAnyRole("USER", "ADMIN")
 				.and().
 				httpBasic();
         }
