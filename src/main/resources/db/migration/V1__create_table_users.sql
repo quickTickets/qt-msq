@@ -13,7 +13,7 @@ WITH (
 OIDS=FALSE
 );
 ALTER TABLE public.users
-  OWNER TO root;
+  OWNER TO postgres;
 
 -- Sequence: public.hibernate_sequence
 -- DROP SEQUENCE public.hibernate_sequence;
@@ -25,4 +25,4 @@ MAXVALUE 9223372036854775807
 START 1
 CACHE 1;
 ALTER TABLE public.hibernate_sequence
-  OWNER TO root;
+  OWNER TO postgres;

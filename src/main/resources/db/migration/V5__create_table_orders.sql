@@ -12,4 +12,4 @@ WITH (
 OIDS=FALSE
 );
 ALTER TABLE public.orders
-  OWNER TO root;
+  OWNER TO postgres;

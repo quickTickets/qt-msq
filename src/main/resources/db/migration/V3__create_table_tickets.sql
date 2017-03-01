@@ -9,4 +9,4 @@ WITH (
 OIDS=FALSE
 );
 ALTER TABLE public.tickets
-  OWNER TO root;
+  OWNER TO postgres;

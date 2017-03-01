@@ -48,8 +48,8 @@ task wrapper(type: Wrapper) {
 }
 
 flyway {
-    url = 'jdbc:postgresql://localhost:32760/qtdb'
-    user = 'root'
+    url = 'jdbc:postgresql://localhost:32761/qtdb'
+    user = 'postgres'
     password = ''
     baselineOnMigrate = true
 }
