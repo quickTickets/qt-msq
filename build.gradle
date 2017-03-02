@@ -49,7 +49,7 @@ task wrapper(type: Wrapper) {
 
 
 flyway {
-    url = 'jdbc:postgresql://172.17.0.1:45522/postgres'
+    url = 'jdbc:postgresql://localhost:5432/postgres'
     user = 'postgres'
     password = ''
     baselineOnMigrate = true
